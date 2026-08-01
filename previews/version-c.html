@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIMA DIMA — Version C (Riche)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rouge: #C1272D;
+    --rouge-fonce: #8B1A1F;
+    --vert: #006233;
+    --vert-fonce: #003D20;
+    --or: #D4AF37;
+    --or-clair: #F4E4C1;
+    --blanc: #FAF9F6;
+    --noir: #1A1A1A;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--noir);
+    color: var(--blanc);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(26,26,26,0.98);
+    backdrop-filter: blur(10px);
+    padding: 0 2rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(212,175,55,0.4);
+  }
+
+  /* Motif géométrique dans le header */
+  header::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rouge), var(--or), var(--vert), var(--or), var(--rouge));
+  }
+
+  .logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    color: white;
+  }
+  .logo span { color: var(--or); }
+
+  nav { display: flex; gap: 2rem; }
+  nav a {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--or); }
+
+  .btn-header {
+    background: transparent;
+    color: var(--or);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    border: 1px solid var(--or);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-header:hover {
+    background: var(--or);
+    color: var(--noir);
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding-top: 70px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--noir);
+  }
+
+  /* Grande arche principale */
+  .arch-main {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 700px;
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 400px 400px 0 0;
+    pointer-events: none;
+  }
+
+  /* Arche secondaire */
+  .arch-inner {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 680px;
+    height: 600px;
+    border: 1px solid rgba(212,175,55,0.12);
+    border-radius: 340px 340px 0 0;
+    pointer-events: none;
+  }
+
+  /* Motif zellige géométrique */
+  .zellige {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 50px, var(--or) 50px, var(--or) 51px),
+      repeating-linear-gradient(90deg, transparent, transparent 50px, var(--or) 50px, var(--or) 51px),
+      repeating-linear-gradient(45deg, transparent, transparent 35px, var(--rouge) 35px, var(--rouge) 36px),
+      repeating-linear-gradient(-45deg, transparent, transparent 35px, var(--vert) 35px, var(--vert) 36px);
+    pointer-events: none;
+  }
+
+  /* Coins décoratifs */
+  .corner {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+  }
+  .corner-tl {
+    top: 80px; left: 20px;
+    border-top: 2px solid var(--or);
+    border-left: 2px solid var(--or);
+    border-radius: 20px 0 0 0;
+    opacity: 0.4;
+  }
+  .corner-tr {
+    top: 80px; right: 20px;
+    border-top: 2px solid var(--or);
+    border-right: 2px solid var(--or);
+    border-radius: 0 20px 0 0;
+    opacity: 0.4;
+  }
+  .corner-bl {
+    bottom: 20px; left: 20px;
+    border-bottom: 2px solid var(--or);
+    border-left: 2px solid var(--or);
+    border-radius: 0 0 0 20px;
+    opacity: 0.4;
+  }
+  .corner-br {
+    bottom: 20px; right: 20px;
+    border-bottom: 2px solid var(--or);
+    border-right: 2px solid var(--or);
+    border-radius: 0 0 20px 0;
+    opacity: 0.4;
+  }
+
+  /* Gradient de fond */
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(193,39,45,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 20% 100%, rgba(0,98,51,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 80% 100%, rgba(212,175,55,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ornement étoile de David marocaine */
+  .star-ornement {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .star-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--or));
+  }
+  .star-line.right { background: linear-gradient(90deg, var(--or), transparent); }
+  .star-icon { color: var(--or); font-size: 1.5rem; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.5);
+    color: var(--or);
+    font-size: 0.72rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 5.5rem;
+    font-weight: 800;
+    line-height: 1.0;
+    margin-bottom: 0;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 .line1 { 
+    display: block;
+    color: var(--rouge);
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .hero h1 .line2 { 
+    display: block;
+    color: white;
+  }
+
+  .hero h1 .line3 { 
+    display: block;
+    color: var(--or);
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  /* Ligne dorée ornementale */
+  .or-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 2rem 0;
+  }
+  .or-divider-line {
+    height: 1px;
+    width: 100px;
+    background: linear-gradient(90deg, transparent, var(--or));
+  }
+  .or-divider-line.right {
+    background: linear-gradient(90deg, var(--or), transparent);
+  }
+  .or-diamond {
+    width: 10px;
+    height: 10px;
+    background: var(--or);
+    transform: rotate(45deg);
+  }
+  .or-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--or);
+    transform: rotate(45deg);
+    opacity: 0.5;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(250,249,246,0.65);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--rouge);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 1rem 2.5rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 30px rgba(193,39,45,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .btn-primary:hover {
+    background: var(--rouge-fonce);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(193,39,45,0.5);
+  }
+
+  .btn-or {
+    background: transparent;
+    color: var(--or);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 1rem 2.5rem;
+    border-radius: 6px;
+    border: 1px solid rgba(212,175,55,0.5);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-or:hover {
+    background: rgba(212,175,55,0.1);
+    border-color: var(--or);
+    transform: translateY(-2px);
+  }
+
+  .social-proof {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: rgba(250,249,246,0.4);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .social-proof strong { color: var(--or); font-weight: 700; }
+
+  /* Images avec cadre architectural */
+  .hero-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 780px;
+    margin: 4rem auto 0;
+  }
+
+  .hero-img-frame {
+    position: relative;
+  }
+
+  /* Arche sur chaque image */
+  .arch-frame {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 16px);
+    height: 60%;
+    border: 1px solid rgba(212,175,55,0.5);
+    border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .hero-img-wrap {
+    border-radius: 100px 100px 8px 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.2);
+    position: relative;
+  }
+
+  .hero-img-wrap:nth-child(2) .hero-img-inner {
+    margin-top: -1.5rem;
+  }
+
+  .hero-img-inner {
+    border-radius: 100px 100px 8px 8px;
+    overflow: hidden;
+  }
+
+  .hero-img-wrap img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+  .hero-img-wrap:hover img { transform: scale(1.05); }
+
+  .img-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(26,26,26,0.95), transparent);
+    padding: 1.5rem 1rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--or);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  /* Version label */
+  .version-label {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(26,26,26,0.95);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+    z-index: 999;
+    border: 1px solid rgba(212,175,55,0.5);
+  }
+  .version-label span { color: var(--or); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DIMA<span>DIMA</span></div>
+  <nav>
+    <a href="#">Pourquoi nous</a>
+    <a href="#">Designs</a>
+    <a href="#">Communauté</a>
+    <a href="#">FAQ</a>
+  </nav>
+  <a href="#" class="btn-header">Rejoindre</a>
+</header>
+
+<section class="hero">
+  <div class="zellige"></div>
+  <div class="hero-gradient"></div>
+  <div class="arch-main"></div>
+  <div class="arch-inner"></div>
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="hero-inner">
+    <div class="star-ornement">
+      <div class="star-line"></div>
+      <div class="star-icon">✦</div>
+      <div class="star-line right"></div>
+    </div>
+
+    <div class="hero-badge">🇲🇦 Bientôt disponible — Édition limitée</div>
+
+    <h1>
+      <span class="line1">Un seul peuple</span>
+      <span class="line2">Un seul cœur</span>
+      <span class="line3">Une seule patrie</span>
+    </h1>
+
+    <div class="or-divider">
+      <div class="or-divider-line"></div>
+      <div class="or-dot"></div>
+      <div class="or-diamond"></div>
+      <div class="or-dot"></div>
+      <div class="or-divider-line right"></div>
+    </div>
+
+    <p>Maillots streetwear célébrant chaque région du Maroc. Qualité premium, histoire authentique, vraie communauté.</p>
+
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary">Rejoindre le mouvement</a>
+      <a href="#" class="btn-or">Voir les designs</a>
+    </div>
+
+    <p class="social-proof">🔥 <strong>347+</strong> personnes déjà inscrites</p>
+
+    <div class="hero-images">
+      <div class="hero-img-frame">
+        <div class="hero-img-wrap">
+          <img src="https://placehold.co/300x300/C1272D/FAF9F6?text=DIMA+DIMA" alt="Jersey Casablanca">
+          <div class="img-badge">#01 Casablanca</div>
+        </div>
+      </div>
+      <div class="hero-img-frame" style="margin-top:-2rem">
+        <div class="hero-img-wrap">
+          <img src="https://placehold.co/300x300/006233/FAF9F6?text=DIMA+DIMA" alt="Jersey Marrakech">
+          <div class="img-badge">#02 Marrakech</div>
+        </div>
+      </div>
+      <div class="hero-img-frame">
+        <div class="hero-img-wrap">
+          <img src="https://placehold.co/300x300/1A1A1A/D4AF37?text=DIMA+DIMA" alt="Jersey Fès">
+          <div class="img-badge">#03 Fès</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="version-label">VERSION <span>C</span> — Riche</div>
+
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIMA DIMA — Version Finale</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rouge: #C1272D;
+    --rouge-fonce: #8B1A1F;
+    --vert: #006233;
+    --vert-fonce: #003D20;
+    --or: #D4AF37;
+    --or-clair: #F4E4C1;
+    --or-fonce: #B8941E;
+    --blanc: #FAF9F6;
+    --noir: #1A1A1A;
+    --gris: #6B7280;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--blanc);
+    color: var(--noir);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ======== HEADER ======== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,249,246,0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0 3rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--or) 20%, var(--or) 80%, transparent);
+  }
+
+  .logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    color: var(--noir);
+    text-decoration: none;
+  }
+  .logo span { color: var(--rouge); }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  nav a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--noir);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--or);
+    transition: width 0.3s;
+  }
+  nav a:hover { color: var(--rouge); }
+  nav a:hover::after { width: 100%; }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .lang-btn {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gris);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .lang-btn:hover {
+    color: var(--noir);
+    background: rgba(212,175,55,0.1);
+  }
+
+  .btn-header {
+    background: var(--rouge);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 2px 12px rgba(193,39,45,0.25);
+  }
+  .btn-header:hover {
+    background: var(--rouge-fonce);
+    transform: translateY(-1px);
+  }
+
+  /* ======== HERO ======== */
+  .hero {
+    padding-top: 72px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--blanc);
+  }
+
+  /* ---- GRANDE ARCHE CENTRALE ---- */
+  .arch-container {
+    position: absolute;
+    top: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: calc(100vh - 72px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Arche extérieure */
+  .arch-outer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 85%;
+    border: 1.5px solid rgba(212,175,55,0.35);
+    border-radius: 50% 50% 0 0 / 18% 18% 0 0;
+  }
+
+  /* Arche milieu */
+  .arch-mid {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 84%;
+    height: 80%;
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 50% 50% 0 0 / 18% 18% 0 0;
+  }
+
+  /* Arche intérieure */
+  .arch-inner {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 68%;
+    height: 75%;
+    border: 1px solid rgba(212,175,55,0.1);
+    border-radius: 50% 50% 0 0 / 18% 18% 0 0;
+  }
+
+  /* Points décoratifs au sommet de l'arche */
+  .arch-top-dot {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--or);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+  .arch-top-dot::before,
+  .arch-top-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--or);
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+  .arch-top-dot::before { right: 16px; }
+  .arch-top-dot::after  { left: 16px; }
+
+  /* Lignes verticales de l'arche (colonnes) */
+  .arch-col-left,
+  .arch-col-right {
+    position: absolute;
+    bottom: 0;
+    width: 1.5px;
+    height: 15%;
+    background: linear-gradient(to bottom, rgba(212,175,55,0.35), transparent);
+  }
+  .arch-col-left  { left: 0; }
+  .arch-col-right { right: 0; }
+
+  /* Zellige pattern subtil */
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(212,175,55,0.03) 50px, rgba(212,175,55,0.03) 51px),
+      repeating-linear-gradient(-45deg, transparent, transparent 50px, rgba(193,39,45,0.02) 50px, rgba(193,39,45,0.02) 51px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Coins décoratifs */
+  .corner {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .corner-tl { top: 90px; left: 24px; border-top: 1.5px solid rgba(212,175,55,0.45); border-left: 1.5px solid rgba(212,175,55,0.45); border-radius: 12px 0 0 0; }
+  .corner-tr { top: 90px; right: 24px; border-top: 1.5px solid rgba(212,175,55,0.45); border-right: 1.5px solid rgba(212,175,55,0.45); border-radius: 0 12px 0 0; }
+  .corner-bl { bottom: 24px; left: 24px; border-bottom: 1.5px solid rgba(212,175,55,0.45); border-left: 1.5px solid rgba(212,175,55,0.45); border-radius: 0 0 0 12px; }
+  .corner-br { bottom: 24px; right: 24px; border-bottom: 1.5px solid rgba(212,175,55,0.45); border-right: 1.5px solid rgba(212,175,55,0.45); border-radius: 0 0 12px 0; }
+
+  /* Lumière douce */
+  .hero-light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212,175,55,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ======== HERO INNER ======== */
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 3rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ======== GAUCHE : Contenu ======== */
+
+  /* Ornement supérieur */
+  .ornement-top {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .orn-line {
+    height: 1px;
+    width: 40px;
+    background: linear-gradient(90deg, transparent, var(--or));
+  }
+  .orn-star { color: var(--or); font-size: 1rem; }
+  .orn-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--or-fonce);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212,175,55,0.08);
+    border: 1px solid rgba(212,175,55,0.3);
+    color: var(--or-fonce);
+    font-size: 0.7rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.45rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.8rem;
+    font-weight: 800;
+    line-height: 1.08;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 .line-normal { display: block; color: var(--noir); }
+  .hero h1 .line-rouge  {
+    display: block;
+    color: var(--rouge);
+    position: relative;
+  }
+  .hero h1 .line-rouge::after {
+    content: '';
+    display: block;
+    width: 55%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--or), transparent);
+    margin-top: 4px;
+    border-radius: 2px;
+  }
+  .hero h1 .line-vert { display: block; color: var(--vert); }
+
+  /* Diviseur ornemental */
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+  .or-div-diamond {
+    width: 7px;
+    height: 7px;
+    background: var(--or);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .or-div-dot {
+    width: 3px;
+    height: 3px;
+    background: rgba(212,175,55,0.5);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .or-div-line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(90deg, var(--or), transparent);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--gris);
+    line-height: 1.75;
+    margin-bottom: 2.2rem;
+    max-width: 440px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .btn-primary {
+    background: var(--rouge);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(193,39,45,0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover {
+    background: var(--rouge-fonce);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(193,39,45,0.4);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--vert);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    border: 1.5px solid var(--vert);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover {
+    background: var(--vert);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .social-proof {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--gris);
+  }
+  .avatars { display: flex; }
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--blanc);
+    margin-left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+  .avatar:first-child { margin-left: 0; background: #C1272D20; color: var(--rouge); }
+  .avatar:nth-child(2) { background: #00623320; color: var(--vert); }
+  .avatar:nth-child(3) { background: #D4AF3720; color: var(--or-fonce); }
+  .social-proof strong { color: var(--noir); font-weight: 700; }
+
+  /* ======== DROITE : Images ======== */
+  .hero-images {
+    position: relative;
+    height: 560px;
+  }
+
+  .img-main {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 55%;
+    height: 490px;
+    border-radius: 999px 999px 20px 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+    border: 1px solid rgba(212,175,55,0.25);
+  }
+  .img-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .img-main:hover img { transform: scale(1.04); }
+
+  .img-sec1 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 42%;
+    height: 230px;
+    border-radius: 999px 999px 14px 14px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    border: 1px solid rgba(212,175,55,0.2);
+  }
+  .img-sec1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .img-sec1:hover img { transform: scale(1.04); }
+
+  .img-sec2 {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    width: 42%;
+    height: 230px;
+    border-radius: 999px 999px 14px 14px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    border: 1px solid rgba(212,175,55,0.2);
+  }
+  .img-sec2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .img-sec2:hover img { transform: scale(1.04); }
+
+  .region-badge {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(250,249,246,0.95);
+    backdrop-filter: blur(8px);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.67rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--noir);
+    letter-spacing: 0.06em;
+    border-left: 3px solid var(--or);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .region-badge .num { color: var(--rouge); }
+
+  .float-badge {
+    position: absolute;
+    top: 14px;
+    right: -10px;
+    background: var(--rouge);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    box-shadow: 0 4px 12px rgba(193,39,45,0.35);
+    z-index: 10;
+  }
+
+  .float-counter {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid rgba(212,175,55,0.35);
+    border-radius: 100px;
+    padding: 0.5rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--vert);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.75); }
+  }
+  .float-counter span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--noir);
+    font-family: 'Montserrat', sans-serif;
+  }
+  .float-counter strong { color: var(--rouge); }
+
+  /* Version label */
+  .version-label {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--noir);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.08em;
+    z-index: 999;
+    border: 1px solid rgba(212,175,55,0.4);
+  }
+  .version-label span { color: var(--or); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">DIMA<span>DIMA</span></a>
+  <nav>
+    <a href="#">Pourquoi nous</a>
+    <a href="#">Designs</a>
+    <a href="#">Communauté</a>
+    <a href="#">FAQ</a>
+  </nav>
+  <div class="header-right">
+    <button class="lang-btn">FR ▾</button>
+    <a href="#" class="btn-header">Rejoindre →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-light"></div>
+
+  <!-- GRANDE ARCHE -->
+  <div class="arch-container">
+    <div class="arch-outer">
+      <div class="arch-top-dot"></div>
+      <div class="arch-col-left"></div>
+      <div class="arch-col-right"></div>
+    </div>
+    <div class="arch-mid"></div>
+    <div class="arch-inner"></div>
+  </div>
+
+  <!-- Coins décoratifs -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="hero-inner">
+
+    <!-- GAUCHE -->
+    <div class="hero-content">
+      <div class="ornement-top">
+        <div class="orn-line"></div>
+        <div class="orn-star">✦</div>
+        <div class="orn-text">Collection 2025</div>
+      </div>
+
+      <div class="hero-badge">🇲🇦 Bientôt disponible — Édition limitée</div>
+
+      <h1>
+        <span class="line-normal">Un seul peuple,</span>
+        <span class="line-rouge">Un seul cœur,</span>
+        <span class="line-vert">Une seule patrie.</span>
+      </h1>
+
+      <div class="or-divider">
+        <div class="or-div-dot"></div>
+        <div class="or-div-diamond"></div>
+        <div class="or-div-dot"></div>
+        <div class="or-div-line"></div>
+      </div>
+
+      <p>Maillots streetwear qui célèbrent chaque région du Maroc. Qualité premium, histoire authentique, vraie communauté.</p>
+
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Rejoindre le mouvement →</a>
+        <a href="#" class="btn-ghost">Voir les designs</a>
+      </div>
+
+      <div class="social-proof">
+        <div class="avatars">
+          <div class="avatar">M</div>
+          <div class="avatar">K</div>
+          <div class="avatar">Y</div>
+        </div>
+        <span>🔥 <strong>347+</strong> personnes déjà inscrites</span>
+      </div>
+    </div>
+
+    <!-- DROITE -->
+    <div class="hero-images">
+      <div class="img-main">
+        <img src="https://placehold.co/400x490/C1272D/FAF9F6?text=DIMA+DIMA" alt="Jersey Casablanca">
+        <div class="region-badge"><span class="num">#01</span> Casablanca-Settat</div>
+        <div class="float-badge">Bientôt</div>
+      </div>
+
+      <div class="img-sec1">
+        <img src="https://placehold.co/300x230/006233/FAF9F6?text=DIMA+DIMA" alt="Jersey Marrakech">
+        <div class="region-badge"><span class="num">#02</span> Marrakech</div>
+      </div>
+
+      <div class="img-sec2">
+        <img src="https://placehold.co/300x230/1A1A1A/D4AF37?text=DIMA+DIMA" alt="Jersey Fès">
+        <div class="region-badge"><span class="num">#03</span> Fès-Meknès</div>
+      </div>
+
+      <div class="float-counter">
+        <div class="pulse"></div>
+        <span><strong>347+</strong> déjà inscrits</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="version-label">VERSION <span>FINALE</span></div>
+
+</body>
+</html>

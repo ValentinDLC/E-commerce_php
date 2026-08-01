@@ -179,7 +179,7 @@ function initLanguageSwitcher() {
     });
   });
 
-  const savedLang = localStorage.getItem('dima_lang') || 'en';
+  const savedLang = localStorage.getItem('dima_lang') || 'fr';
   if (savedLang !== 'en') {
     setLanguage(savedLang);
     currentLangLabel.textContent = savedLang.toUpperCase();

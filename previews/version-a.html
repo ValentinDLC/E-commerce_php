@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIMA DIMA — Version A (Subtile)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rouge: #C1272D;
+    --rouge-fonce: #8B1A1F;
+    --vert: #006233;
+    --vert-fonce: #003D20;
+    --or: #D4AF37;
+    --or-clair: #F4E4C1;
+    --blanc: #FAF9F6;
+    --noir: #1A1A1A;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--blanc);
+    color: var(--noir);
+    min-height: 100vh;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,249,246,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+    padding: 0 2rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--rouge); }
+
+  nav { display: flex; gap: 2rem; }
+  nav a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--noir);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--rouge); }
+
+  .btn-header {
+    background: var(--rouge);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-header:hover { background: var(--rouge-fonce); }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding-top: 70px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--blanc);
+  }
+
+  /* Zellige pattern background très subtil */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 30px,
+        rgba(193,39,45,0.03) 30px,
+        rgba(193,39,45,0.03) 31px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 30px,
+        rgba(0,98,51,0.03) 30px,
+        rgba(0,98,51,0.03) 31px
+      );
+    pointer-events: none;
+  }
+
+  /* Arche décorative subtile en haut */
+  .arch-top {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 300px 300px 0 0;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.3);
+    color: #B8941E;
+    font-size: 0.75rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 .accent { color: var(--rouge); }
+
+  /* Ligne décorative dorée sous le titre */
+  .hero h1 .underline-or {
+    display: inline-block;
+    position: relative;
+  }
+  .hero h1 .underline-or::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--or), transparent);
+    border-radius: 2px;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--rouge);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(193,39,45,0.3);
+  }
+  .btn-primary:hover {
+    background: var(--rouge-fonce);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(193,39,45,0.4);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--noir);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    border: 2px solid var(--noir);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover {
+    background: var(--noir);
+    color: white;
+  }
+
+  .social-proof {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #888;
+  }
+  .social-proof strong { color: var(--noir); font-weight: 700; }
+
+  /* Images côté droit */
+  .hero-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .hero-img-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .hero-img-wrap:first-child {
+    grid-row: span 2;
+    margin-top: 2rem;
+  }
+  .hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Ornement arche subtil sur les images */
+  .hero-images::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 120px;
+    height: 80px;
+    border: 2px solid rgba(212,175,55,0.3);
+    border-radius: 60px 60px 0 0;
+    pointer-events: none;
+  }
+
+  /* Label version */
+  .version-label {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--noir);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+    z-index: 999;
+  }
+  .version-label span { color: var(--or); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DIMA<span>DIMA</span></div>
+  <nav>
+    <a href="#">Pourquoi nous</a>
+    <a href="#">Designs</a>
+    <a href="#">Communauté</a>
+    <a href="#">FAQ</a>
+  </nav>
+  <a href="#" class="btn-header">Rejoindre</a>
+</header>
+
+<section class="hero">
+  <div class="arch-top"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">🇲🇦 Bientôt disponible — Édition limitée</div>
+      <h1>
+        Un seul peuple,<br>
+        <span class="accent underline-or">Un seul cœur,</span><br>
+        Une seule patrie.
+      </h1>
+      <p>Maillots streetwear qui célèbrent chaque région du Maroc. Qualité premium, histoire authentique, vraie communauté.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Rejoindre le mouvement</a>
+        <a href="#" class="btn-ghost">Voir les designs</a>
+      </div>
+      <p class="social-proof">🔥 <strong>347+</strong> personnes déjà inscrites</p>
+    </div>
+
+    <div class="hero-images">
+      <div class="hero-img-wrap">
+        <img src="https://placehold.co/300x500/C1272D/FAF9F6?text=DIMA+DIMA" alt="Jersey 1">
+      </div>
+      <div class="hero-img-wrap">
+        <img src="https://placehold.co/300x250/006233/FAF9F6?text=DIMA+DIMA" alt="Jersey 2">
+      </div>
+      <div class="hero-img-wrap">
+        <img src="https://placehold.co/300x250/1A1A1A/D4AF37?text=DIMA+DIMA" alt="Jersey 3">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="version-label">VERSION <span>A</span> — Subtile</div>
+
+</body>
+</html>

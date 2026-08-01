@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIMA DIMA — Version B (Équilibrée)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rouge: #C1272D;
+    --rouge-fonce: #8B1A1F;
+    --vert: #006233;
+    --vert-fonce: #003D20;
+    --or: #D4AF37;
+    --or-clair: #F4E4C1;
+    --blanc: #FAF9F6;
+    --noir: #1A1A1A;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--blanc);
+    color: var(--noir);
+    min-height: 100vh;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--vert-fonce);
+    padding: 0 2rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--or);
+  }
+
+  .logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: white;
+  }
+  .logo span { color: var(--or); }
+
+  nav { display: flex; gap: 2rem; }
+  nav a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--or); }
+
+  .btn-header {
+    background: var(--rouge);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    border: 1px solid rgba(212,175,55,0.4);
+  }
+  .btn-header:hover { background: var(--rouge-fonce); }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding-top: 70px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--blanc);
+  }
+
+  /* Grande arche centrale en background */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 500px;
+    border: 2px solid rgba(212,175,55,0.2);
+    border-radius: 450px 450px 0 0;
+    pointer-events: none;
+  }
+
+  /* Arche intérieure */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 750px;
+    height: 420px;
+    border: 1px solid rgba(193,39,45,0.1);
+    border-radius: 375px 375px 0 0;
+    pointer-events: none;
+  }
+
+  /* Zellige pattern */
+  .zellige-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(212,175,55,0.05) 40px, rgba(212,175,55,0.05) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(212,175,55,0.05) 40px, rgba(212,175,55,0.05) 41px),
+      repeating-linear-gradient(45deg, transparent, transparent 28px, rgba(193,39,45,0.03) 28px, rgba(193,39,45,0.03) 29px),
+      repeating-linear-gradient(-45deg, transparent, transparent 28px, rgba(0,98,51,0.03) 28px, rgba(0,98,51,0.03) 29px);
+    pointer-events: none;
+  }
+
+  /* Bandes couleur gauche */
+  .color-bar-left {
+    position: absolute;
+    left: 0;
+    top: 70px;
+    bottom: 0;
+    width: 6px;
+    background: linear-gradient(to bottom, var(--rouge), var(--vert));
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ornement au-dessus du badge */
+  .ornement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .ornement-line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, var(--or));
+  }
+  .ornement-line.right {
+    background: linear-gradient(90deg, var(--or), transparent);
+  }
+  .ornement-star {
+    color: var(--or);
+    font-size: 1.2rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--vert-fonce);
+    color: var(--or);
+    font-size: 0.75rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1.5rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--or);
+  }
+
+  .hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+  }
+
+  .hero h1 .line-rouge { color: var(--rouge); }
+  .hero h1 .line-vert { color: var(--vert); }
+
+  /* Diviseur ornemental */
+  .divider-or {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .divider-or::before,
+  .divider-or::after {
+    content: '';
+    height: 2px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--or));
+  }
+  .divider-or::after {
+    background: linear-gradient(90deg, var(--or), transparent);
+  }
+  .divider-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--or);
+    transform: rotate(45deg);
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--rouge);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1rem 2.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(193,39,45,0.35);
+  }
+  .btn-primary:hover {
+    background: var(--rouge-fonce);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: var(--vert);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1rem 2.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0,98,51,0.3);
+  }
+  .btn-secondary:hover {
+    background: var(--vert-fonce);
+    transform: translateY(-2px);
+  }
+
+  .social-proof {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #888;
+  }
+  .social-proof strong { color: var(--noir); font-weight: 700; }
+
+  /* Images grille */
+  .hero-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 4rem auto 0;
+  }
+
+  .hero-img-wrap {
+    position: relative;
+    border-radius: 200px 200px 12px 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+
+  /* Arche sur les images */
+  .hero-img-wrap:nth-child(2) {
+    margin-top: -2rem;
+  }
+
+  .hero-img-wrap img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+  .hero-img-wrap:hover img { transform: scale(1.05); }
+
+  /* Badge région sur les images */
+  .img-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(250,249,246,0.95);
+    backdrop-filter: blur(4px);
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--noir);
+    border-left: 3px solid var(--or);
+  }
+
+  /* Version label */
+  .version-label {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--vert-fonce);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+    z-index: 999;
+    border: 1px solid var(--or);
+  }
+  .version-label span { color: var(--or); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DIMA<span>DIMA</span></div>
+  <nav>
+    <a href="#">Pourquoi nous</a>
+    <a href="#">Designs</a>
+    <a href="#">Communauté</a>
+    <a href="#">FAQ</a>
+  </nav>
+  <a href="#" class="btn-header">Rejoindre</a>
+</header>
+
+<section class="hero">
+  <div class="zellige-bg"></div>
+  <div class="color-bar-left"></div>
+
+  <div class="hero-inner">
+    <div class="ornement">
+      <div class="ornement-line"></div>
+      <div class="ornement-star">✦</div>
+      <div class="ornement-line right"></div>
+    </div>
+
+    <div class="hero-badge">🇲🇦 Bientôt — Édition limitée</div>
+
+    <h1>
+      <span class="line-rouge">Un seul peuple,</span><br>
+      Un seul cœur,<br>
+      <span class="line-vert">Une seule patrie.</span>
+    </h1>
+
+    <div class="divider-or">
+      <div class="divider-dot"></div>
+    </div>
+
+    <p>Maillots streetwear célébrant chaque région du Maroc. Qualité premium, histoire authentique, vraie communauté.</p>
+
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary">Rejoindre le mouvement</a>
+      <a href="#" class="btn-secondary">Voir les designs</a>
+    </div>
+
+    <p class="social-proof">🔥 <strong>347+</strong> personnes déjà inscrites</p>
+
+    <div class="hero-images">
+      <div class="hero-img-wrap">
+        <img src="https://placehold.co/300x320/C1272D/FAF9F6?text=DIMA+DIMA" alt="Jersey Casablanca">
+        <div class="img-badge">#01 Casablanca</div>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="https://placehold.co/300x320/006233/FAF9F6?text=DIMA+DIMA" alt="Jersey Marrakech">
+        <div class="img-badge">#02 Marrakech</div>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="https://placehold.co/300x320/1A1A1A/D4AF37?text=DIMA+DIMA" alt="Jersey Fès">
+        <div class="img-badge">#03 Fès</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="version-label">VERSION <span>B</span> — Équilibrée</div>
+
+</body>
+</html>
