@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-crimson: #DC143C;
+  --color-crimson-dark: #B01030;
+  --color-crimson-light: #E84560;
+
+  --color-forest: #2E7D32;
+  --color-forest-dark: #1B5E20;
+  --color-forest-light: #4CAF50;
+
+  --color-gold: #FFD700;
+  --color-gold-dark: #D4AF37;
+  --color-gold-light: #FFED4A;
+
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-cta: "Montserrat", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: #1f2937;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-crimson text-white font-cta uppercase tracking-wide px-8 py-4 rounded-lg
+           hover:bg-crimson-dark transition-all duration-300
+           shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply bg-forest text-white font-cta uppercase tracking-wide px-8 py-4 rounded-lg
+           hover:bg-forest-dark transition-all duration-300
+           shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+  }
+
+  .btn-ghost {
+    @apply border-2 border-gray-800 text-gray-800 font-cta uppercase tracking-wide
+           px-8 py-4 rounded-lg hover:bg-gray-800 hover:text-white
+           transition-all duration-300;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
