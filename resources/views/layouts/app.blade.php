@@ -14,7 +14,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-ink text-ivory">
+<body class="bg-white text-ink">
 
     @include('partials.header-c')
 
@@ -23,6 +23,7 @@
     </main>
 
     @include('partials.footer-c')
+    @include('partials.cart-drawer')
 
 </body>
 </html>

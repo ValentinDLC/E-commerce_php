@@ -1,151 +1,108 @@
 import './bootstrap';
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeaderScroll();
   initMobileMenu();
   initLanguageSwitcher();
   initWaitlistForm();
   initActiveNav();
+  initCartDrawer();
+  initProductPage();
+  initCollectionPage();
+  initCheckoutPage();
+  initWishlist();
+  renderWishlistPage();
 });
-
-function initHeaderScroll() {
-  const header = document.getElementById('header');
-  if (!header) return;
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
-      header.classList.add('shadow-md');
-    } else {
-      header.classList.remove('shadow-md');
-    }
-  });
-}
 
 function initMobileMenu() {
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   if (!btn || !menu) return;
-
-  btn.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-  });
-
+  btn.addEventListener('click', () => menu.classList.toggle('hidden'));
   menu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => menu.classList.add('hidden'));
   });
 }
 
 const translations = {
-  en: {
-    nav_why: "Why Us", nav_designs: "Designs", nav_community: "Community", nav_faq: "FAQ", nav_cta: "Join Waitlist",
-    hero_badge: "🇲🇦 Coming Soon — Limited Drop",
-    hero_title_1: "One People, One Heart,", hero_title_2: "One Homeland.",
-    hero_subtitle: "Streetwear jerseys celebrating every region of Morocco. Premium quality, authentic story, real community.",
-    hero_cta_primary: "Join The Movement", hero_cta_secondary: "See The Designs",
-    hero_social_proof: "🔥 Join 347+ people already on the waitlist",
-    why_label: "Why DIMA DIMA", why_title: "Celebrate Your Region, Your Culture, Your Nation",
-    why_subtitle: "This isn't just a t-shirt store. It's a movement.",
-    why_1_title: "Premium Quality", why_1_desc: "High-grade fabrics, real craftsmanship. Not cheap streetwear — built to last and to make you proud.",
-    why_2_title: "Authentic Story", why_2_desc: "Every design honors a real Moroccan region — its identity, its history, its people.",
-    why_3_title: "Real Community", why_3_desc: "Built with Moroccans, for Moroccans — at home and across the diaspora. One people, united.",
-    designs_label: "The Collection", designs_title: "One Jersey Per Region", designs_subtitle: "Five designs. Five stories. Which one is yours?",
-    badge_soon: "Soon", designs_soon: "Notify me when available",
-    designs_more_1: "+ 7 more regions", designs_more_2: "Full collection revealed at launch", designs_more_cta: "Get Early Access",
-    social_label: "Join The Movement", social_title: "A Growing Community",
-    stat_waitlist: "On the waitlist", stat_followers: "Instagram followers", stat_regions: "Regions represented", stat_countries: "Countries in the diaspora",
-    waitlist_title: "Join The Movement", waitlist_subtitle: "Be the first to know when we launch. Early members get exclusive access and special pricing.",
-    waitlist_email_label: "Email address", waitlist_placeholder: "your@email.com", waitlist_submit: "Join Waitlist",
-    waitlist_privacy: "🔒 No spam. Unsubscribe anytime.",
-    faq_label: "FAQ", faq_title: "Frequently Asked Questions",
-    faq_q1: "When will DIMA DIMA jerseys be available?", faq_a1: "We're launching in the coming weeks. Join the waitlist to be notified the moment we go live — early members get priority access.",
-    faq_q2: "What makes DIMA DIMA different?", faq_a2: "Every jersey tells the story of a real Moroccan region. Premium materials, authentic design, and a mission bigger than fashion — unity.",
-    faq_q3: "Will there be jerseys for all regions?", faq_a3: "Yes! We're rolling out all 12 regions of Morocco progressively. The first 5 designs drop at launch, more follow based on demand.",
-    faq_q4: "What do I get by joining the waitlist?", faq_a4: "Early access before public launch, exclusive launch pricing, and first pick on limited-run designs from your region.",
-    faq_q5: "Do you ship internationally?", faq_a5: "Absolutely. DIMA DIMA is for every Moroccan, at home and abroad. We'll ship worldwide to the diaspora from day one.",
-    footer_tagline: "One people, one heart, one homeland.", footer_rights: "© 2025 DIMA DIMA. All rights reserved."
-  },
   fr: {
-    nav_why: "Pourquoi Nous", nav_designs: "Designs", nav_community: "Communauté", nav_faq: "FAQ", nav_cta: "Rejoindre",
-    hero_badge: "🇲🇦 Bientôt disponible — Édition limitée",
-    hero_title_1: "Un seul peuple, un seul cœur,", hero_title_2: "Une seule patrie.",
-    hero_subtitle: "Des maillots streetwear qui célèbrent chaque région du Maroc. Qualité premium, histoire authentique, vraie communauté.",
-    hero_cta_primary: "Rejoindre le Mouvement", hero_cta_secondary: "Voir les Designs",
-    hero_social_proof: "🔥 Rejoins les 347+ personnes déjà inscrites",
-    why_label: "Pourquoi DIMA DIMA", why_title: "Célèbre ta région, ta culture, ta nation",
-    why_subtitle: "Ce n'est pas juste une marque de t-shirts. C'est un mouvement.",
-    why_1_title: "Qualité Premium", why_1_desc: "Tissus haut de gamme, vrai savoir-faire. Pas du streetwear bon marché — conçu pour durer et te rendre fier.",
-    why_2_title: "Histoire Authentique", why_2_desc: "Chaque design honore une vraie région marocaine — son identité, son histoire, son peuple.",
-    why_3_title: "Vraie Communauté", why_3_desc: "Construit avec des Marocains, pour des Marocains — au pays et dans la diaspora. Un seul peuple, uni.",
-    designs_label: "La Collection", designs_title: "Un Maillot Par Région", designs_subtitle: "Cinq designs. Cinq histoires. Lequel est le tien ?",
-    badge_soon: "Bientôt", designs_soon: "Me notifier à la sortie",
-    designs_more_1: "+ 7 autres régions", designs_more_2: "Collection complète révélée au lancement", designs_more_cta: "Accès Anticipé",
-    social_label: "Rejoins le Mouvement", social_title: "Une Communauté en Croissance",
-    stat_waitlist: "Sur la liste d'attente", stat_followers: "Abonnés Instagram", stat_regions: "Régions représentées", stat_countries: "Pays dans la diaspora",
-    waitlist_title: "Rejoins le Mouvement", waitlist_subtitle: "Sois le premier informé du lancement. Les premiers inscrits ont un accès exclusif et des prix spéciaux.",
-    waitlist_email_label: "Adresse email", waitlist_placeholder: "ton@email.com", waitlist_submit: "Rejoindre",
-    waitlist_privacy: "🔒 Pas de spam. Désabonnement à tout moment.",
-    faq_label: "FAQ", faq_title: "Questions Fréquentes",
-    faq_q1: "Quand les maillots DIMA DIMA seront-ils disponibles ?", faq_a1: "Nous lançons dans les prochaines semaines. Inscris-toi pour être notifié dès la sortie — les premiers inscrits ont un accès prioritaire.",
-    faq_q2: "Qu'est-ce qui rend DIMA DIMA différent ?", faq_a2: "Chaque maillot raconte l'histoire d'une vraie région marocaine. Matériaux premium, design authentique, et une mission plus grande que la mode — l'unité.",
-    faq_q3: "Y aura-t-il des maillots pour toutes les régions ?", faq_a3: "Oui ! Nous déployons progressivement les 12 régions du Maroc. Les 5 premiers designs sortent au lancement, d'autres suivront selon la demande.",
-    faq_q4: "Qu'est-ce que j'obtiens en rejoignant la liste d'attente ?", faq_a4: "Un accès anticipé avant le lancement public, des prix exclusifs, et la priorité sur les designs en édition limitée de ta région.",
-    faq_q5: "Livrez-vous à l'international ?", faq_a5: "Absolument. DIMA DIMA est pour chaque Marocain, au pays et à l'étranger. Nous livrerons dans le monde entier dès le premier jour.",
-    footer_tagline: "Un seul peuple, un seul cœur, une seule patrie.", footer_rights: "© 2025 DIMA DIMA. Tous droits réservés."
+    nav_coll: "Collection", nav_design: "Design", nav_join: "Rejoindre",
+    hero_tag: "Collection Printemps 2025",
+    hero_line1: "UN SEUL", hero_line2: "PEUPLE.", hero_line3: "UN SEUL CŒUR.", hero_line4: "UNE SEULE PATRIE.",
+    hero_sub: "Maillots streetwear célébrant chaque région du Maroc. Performance, authenticité, unité.",
+    cta_join: "Rejoindre le mouvement", cta_discover: "Découvrir",
+    stat_1: "500+ Inscrits", stat_2: "12 Régions", stat_3: "Premium",
+    section_design_1: "LA", section_design_2: "COLLECTION",
+    section_sub: "Chaque maillot = une région marocaine.",
+    link_all: "Voir tout",
+    feat_1: "Performance.", feat_1_d: "Tissus techniques, coupes aérodynamiques, finitions premium.",
+    feat_2: "Identité.", feat_2_d: "Chaque maillot célèbre une région du Maroc avec authenticité.",
+    feat_3: "Unité.", feat_3_d: "Un seul peuple. Un seul maillot. Une seule patrie.",
+    social_title_1: "REJOINS", social_title_2: "LE MOUVEMENT",
+    stat_wait: "Inscrits", stat_reg: "Régions",
+    wait_title_1: "SOIS LE", wait_title_2: "PREMIER",
+    wait_sub: "Accès anticipé, prix exclusifs, priorité sur ton maillot.",
+    ph_email: "ton@email.com", btn_submit: "S'INSCRIRE",
+    faq_title: "QUESTIONS."
+  },
+  en: {
+    nav_coll: "Collection", nav_design: "Design", nav_join: "Join",
+    hero_tag: "Spring 2025 Collection",
+    hero_line1: "ONE", hero_line2: "PEOPLE.", hero_line3: "ONE HEART.", hero_line4: "ONE HOMELAND.",
+    hero_sub: "Streetwear jerseys celebrating every region of Morocco. Performance, authenticity, unity.",
+    cta_join: "Join The Movement", cta_discover: "Discover",
+    stat_1: "500+ Signed Up", stat_2: "12 Regions", stat_3: "Premium",
+    section_design_1: "THE", section_design_2: "COLLECTION",
+    section_sub: "Every jersey = a Moroccan region.",
+    link_all: "See all",
+    feat_1: "Performance.", feat_1_d: "Technical fabrics, aero cuts, premium finish.",
+    feat_2: "Identity.", feat_2_d: "Every jersey honors a Moroccan region, authentically.",
+    feat_3: "Unity.", feat_3_d: "One people. One jersey. One homeland.",
+    social_title_1: "JOIN", social_title_2: "THE MOVEMENT",
+    stat_wait: "Signed up", stat_reg: "Regions",
+    wait_title_1: "BE THE", wait_title_2: "FIRST",
+    wait_sub: "Early access, exclusive pricing, priority on your jersey.",
+    ph_email: "your@email.com", btn_submit: "SIGN UP",
+    faq_title: "QUESTIONS."
   },
   ar: {
-    nav_why: "لماذا نحن", nav_designs: "التصاميم", nav_community: "المجتمع", nav_faq: "الأسئلة", nav_cta: "انضم إلينا",
-    hero_badge: "🇲🇦 قريباً — إصدار محدود",
-    hero_title_1: "شعب واحد، قلب واحد،", hero_title_2: "وطن واحد.",
-    hero_subtitle: "قمصان ستريتوير تحتفي بكل جهة من جهات المغرب. جودة فاخرة، قصة أصيلة، مجتمع حقيقي.",
-    hero_cta_primary: "انضم إلى الحركة", hero_cta_secondary: "شاهد التصاميم",
-    hero_social_proof: "🔥 انضم إلى أكثر من 347 شخص في قائمة الانتظار",
-    why_label: "لماذا ديما ديما", why_title: "احتفل بجهتك، ثقافتك، وطنك",
-    why_subtitle: "هذا ليس مجرد متجر تيشيرتات. إنها حركة.",
-    why_1_title: "جودة فاخرة", why_1_desc: "أقمشة عالية الجودة وحرفية حقيقية. ليس ستريتوير رخيص — مصمم ليدوم ويجعلك فخوراً.",
-    why_2_title: "قصة أصيلة", why_2_desc: "كل تصميم يكرّم جهة مغربية حقيقية — هويتها، تاريخها، شعبها.",
-    why_3_title: "مجتمع حقيقي", why_3_desc: "صُنع مع المغاربة، من أجل المغاربة — في الوطن وفي الشتات. شعب واحد، متحد.",
-    designs_label: "المجموعة", designs_title: "قميص لكل جهة", designs_subtitle: "خمسة تصاميم. خمس قصص. أيها لك؟",
-    badge_soon: "قريباً", designs_soon: "أعلمني عند التوفر",
-    designs_more_1: "+ 7 جهات أخرى", designs_more_2: "المجموعة الكاملة تُكشف عند الإطلاق", designs_more_cta: "احصل على وصول مبكر",
-    social_label: "انضم إلى الحركة", social_title: "مجتمع متنامٍ",
-    stat_waitlist: "في قائمة الانتظار", stat_followers: "متابع على إنستغرام", stat_regions: "جهة ممثَّلة", stat_countries: "دولة في الشتات",
-    waitlist_title: "انضم إلى الحركة", waitlist_subtitle: "كن أول من يعلم عند الإطلاق. الأعضاء الأوائل يحصلون على وصول حصري وأسعار خاصة.",
-    waitlist_email_label: "البريد الإلكتروني", waitlist_placeholder: "بريدك@الإلكتروني.com", waitlist_submit: "انضم إلينا",
-    waitlist_privacy: "🔒 بدون رسائل مزعجة. يمكنك إلغاء الاشتراك في أي وقت.",
-    faq_label: "الأسئلة الشائعة", faq_title: "الأسئلة المتكررة",
-    faq_q1: "متى ستكون قمصان ديما ديما متوفرة؟", faq_a1: "سنطلق في الأسابيع القادمة. انضم لقائمة الانتظار لتُعلَم فور الإطلاق — الأعضاء الأوائل لهم أولوية الوصول.",
-    faq_q2: "ما الذي يميز ديما ديما؟", faq_a2: "كل قميص يحكي قصة جهة مغربية حقيقية. مواد فاخرة، تصميم أصيل، ورسالة أكبر من الموضة — الوحدة.",
-    faq_q3: "هل ستكون هناك قمصان لكل الجهات؟", faq_a3: "نعم! سنطلق 12 جهة مغربية تدريجياً. أول 5 تصاميم تُطلق عند البداية، والباقي حسب الطلب.",
-    faq_q4: "ماذا أحصل عند الانضمام لقائمة الانتظار؟", faq_a4: "وصول مبكر قبل الإطلاق العام، أسعار حصرية، وأولوية في التصاميم محدودة الإصدار من جهتك.",
-    faq_q5: "هل تشحنون دولياً؟", faq_a5: "بالتأكيد. ديما ديما لكل مغربي، في الوطن وفي الخارج. سنشحن عالمياً للشتات منذ اليوم الأول.",
-    footer_tagline: "شعب واحد، قلب واحد، وطن واحد.", footer_rights: "© 2025 ديما ديما. جميع الحقوق محفوظة."
+    nav_coll: "المجموعة", nav_design: "التصميم", nav_join: "انضم",
+    hero_tag: "مجموعة ربيع 2025",
+    hero_line1: "شعب", hero_line2: "واحد.", hero_line3: "قلب واحد.", hero_line4: "وطن واحد.",
+    hero_sub: "قمصان تحتفي بكل جهة مغربية. أداء، أصالة، وحدة.",
+    cta_join: "انضم إلى الحركة", cta_discover: "اكتشف",
+    stat_1: "+500 مسجل", stat_2: "12 جهة", stat_3: "فاخر",
+    section_design_1: "ال", section_design_2: "مجموعة",
+    section_sub: "كل قميص = جهة مغربية.",
+    link_all: "شاهد الكل",
+    feat_1: "الأداء.", feat_1_d: "أقمشة تقنية، قصات فاخرة.",
+    feat_2: "الهوية.", feat_2_d: "كل قميص يكرّم جهة مغربية بأصالة.",
+    feat_3: "الوحدة.", feat_3_d: "شعب واحد. قميص واحد. وطن واحد.",
+    social_title_1: "انضم", social_title_2: "إلى الحركة",
+    stat_wait: "مسجل", stat_reg: "جهة",
+    wait_title_1: "كن", wait_title_2: "الأول",
+    wait_sub: "وصول مبكر، أسعار حصرية، أولوية على قميصك.",
+    ph_email: "بريدك@الإلكتروني.com", btn_submit: "سجّل",
+    faq_title: "أسئلة."
   },
   tz: {
-    nav_why: "Mayelmed nneɣ", nav_designs: "Isuɣan", nav_community: "Agraw", nav_faq: "FAQ", nav_cta: "Ddu yidneɣ",
-    hero_badge: "🇲🇦 Ad iqerreb — Amur imezṛan",
-    hero_title_1: "Yiwen wegdud, yiwen wul,", hero_title_2: "Yiwen wamur.",
-    hero_subtitle: "Ijerra n streetwear i yesɛawaden yal tamnaḍt n Meṛṛuk. Taɣara tameqqrant, tamacahut tidet, agraw n tidet.",
-    hero_cta_primary: "Ddu ɣer umussu", hero_cta_secondary: "Wali isuɣan",
-    hero_social_proof: "🔥 Ddu ɣer 347+ n medden i illan yakan",
-    why_label: "Acuɣer DIMA DIMA", why_title: "Sɛiwed tamnaḍt-ik, adaz-ik, tamurt-ik",
-    why_subtitle: "Mačči d ahanut n tricuten kan. D amussu.",
-    why_1_title: "Taɣara tameqqrant", why_1_desc: "Icḍaḍen ifazen, tazmert tidet. Mačči streetwear irxisen — ittwaxdem ad idum, ad ak-yefk zzux.",
-    why_2_title: "Tamacahut tidet", why_2_desc: "Yal asuɣ yesɛawad tamnaḍt n Meṛṛuk tidet — talɣut-ines, azamul-ines, agdud-ines.",
-    why_3_title: "Agraw n tidet", why_3_desc: "Yettwabna d Imeṛṛukiyen, i Imeṛṛukiyen — di tmurt akked di lɣerba. Yiwen wegdud, yedhem.",
-    designs_label: "Tagrumma", designs_title: "Ijeṛṛi i yal tamnaḍt", designs_subtitle: "Xemsa isuɣan. Xemsa tmucuha. Anwa i k-yellan?",
-    badge_soon: "Ad iqerreb", designs_soon: "Ssekcem-iyi asexbar mi ara yili",
-    designs_more_1: "+ 7 timnaḍin nniḍen", designs_more_2: "Tagrumma tugmirt ad d-tban deg usenker", designs_more_cta: "Awi anekcum azwir",
-    social_label: "Ddu ɣer umussu", social_title: "Agraw yettimɣuren",
-    stat_waitlist: "Deg umuɣ n uṛaǧu", stat_followers: "Imeḍfaṛen n Instagram", stat_regions: "Timnaḍin yettwasɛawaden", stat_countries: "Tamurin n lɣerba",
-    waitlist_title: "Ddu ɣer umussu", waitlist_subtitle: "Ili d amezwaru ara yeẓren asenker. Iɛeggalen imezwura ad awin anekcum azwir d ssuma tazadaṛt.",
-    waitlist_email_label: "Tansa n imayl", waitlist_placeholder: "imayl-ik@email.com", waitlist_submit: "Ddu yidneɣ",
-    waitlist_privacy: "🔒 Ulac aẓru. Tzemreḍ ad teffɣeḍ melmi tebɣiḍ.",
-    faq_label: "Isteqsiyen", faq_title: "Isteqsiyen yettuɛawaden aṭas",
-    faq_q1: "Melmi ara ilin ijerra n DIMA DIMA?", faq_a1: "Ad nsenker deg dduṛt i d-iteddun. Ddu ɣer umuɣ n uṛaǧu akken ad theliḍ asenker — iɛeggalen imezwura ttwafernen.",
-    faq_q2: "D acu i yesmenyifen DIMA DIMA?", faq_a2: "Yal ajeṛṛi yeqqaṛ tamacahut n tmnaḍt n Meṛṛuk tidet. Icḍaḍen ifazen, asuɣ n tidet, d lhedef meqqren nnig n tcemlit — adhem.",
-    faq_q3: "Ad ilint ijerra i tmnaḍin meṛṛa?", faq_a3: "Ih! Ad d-nefk 12 n temnaḍin n Meṛṛuk s wudem asdawan. 5 isuɣan imezwura ad d-banen deg usenker, wiyaḍ ad d-asen s lḥaǧa.",
-    faq_q4: "D acu ara awiɣ ma ddiɣ ɣer umuɣ n uṛaǧu?", faq_a4: "Anekcum azwir uqbel usenker azayez, ssuma tazadaṛt, d afran amezwaru deg isuɣan n tmnaḍt-ik.",
-    faq_q5: "Tceggɛem ɣer umaḍal meṛṛa?", faq_a5: "Ih s tidet. DIMA DIMA i yal Ameṛṛuki, di tmurt neɣ di lɣerba. Ad nceggeɛ ɣer umaḍal seg wass amezwaru.",
-    footer_tagline: "Yiwen wegdud, yiwen wul, yiwen wamur.", footer_rights: "© 2025 DIMA DIMA. Akk izerfan ttwaḥerzen."
+    nav_coll: "Tagrumma", nav_design: "Asuɣ", nav_join: "Ddu yidneɣ",
+    hero_tag: "Tagrumma n tafsut 2025",
+    hero_line1: "YIWEN", hero_line2: "WEGDUD.", hero_line3: "YIWEN WUL.", hero_line4: "YIWEN WAMUR.",
+    hero_sub: "Ijerra n streetwear i yesɛawaden yal tamnaḍt n Meṛṛuk.",
+    cta_join: "Ddu ɣer umussu", cta_discover: "Wali",
+    stat_1: "500+", stat_2: "12 Timnaḍin", stat_3: "Premium",
+    section_design_1: "TA", section_design_2: "GRUMMA",
+    section_sub: "Yal ajeṛṛi = tamnaḍt.",
+    link_all: "Wali akk",
+    feat_1: "Tazmert.", feat_1_d: "Icḍaḍen ifazen.",
+    feat_2: "Talɣut.", feat_2_d: "Yal asuɣ yesɛawad tamnaḍt s tidet.",
+    feat_3: "Adhem.", feat_3_d: "Yiwen wegdud. Yiwen ujeṛṛi. Yiwen wamur.",
+    social_title_1: "DDU", social_title_2: "ƔER UMUSSU",
+    stat_wait: "Ttwajerin", stat_reg: "Timnaḍin",
+    wait_title_1: "ILI D", wait_title_2: "AMEZWARU",
+    wait_sub: "Anekcum azwir, ssuma tazadaṛt.",
+    ph_email: "imayl-ik@email.com", btn_submit: "JERI",
+    faq_title: "ISTEQSIYEN."
   }
 };
 
@@ -155,7 +112,6 @@ function initLanguageSwitcher() {
   const toggle = document.getElementById('lang-toggle');
   const menu = document.getElementById('lang-menu');
   const currentLangLabel = document.getElementById('current-lang');
-
   if (!toggle || !menu || !currentLangLabel) return;
 
   toggle.addEventListener('click', () => {
@@ -165,9 +121,7 @@ function initLanguageSwitcher() {
   });
 
   document.addEventListener('click', (e) => {
-    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-      menu.classList.add('hidden');
-    }
+    if (!toggle.contains(e.target) && !menu.contains(e.target)) menu.classList.add('hidden');
   });
 
   document.querySelectorAll('.lang-option').forEach(btn => {
@@ -180,29 +134,23 @@ function initLanguageSwitcher() {
   });
 
   const savedLang = localStorage.getItem('dima_lang') || 'fr';
-  if (savedLang !== 'en') {
-    setLanguage(savedLang);
-    currentLangLabel.textContent = savedLang.toUpperCase();
-  }
+  setLanguage(savedLang);
+  currentLangLabel.textContent = savedLang.toUpperCase();
 }
 
 function setLanguage(lang) {
   const dict = translations[lang];
   if (!dict) return;
-
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (dict[key]) el.textContent = dict[key];
   });
-
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
     if (dict[key]) el.setAttribute('placeholder', dict[key]);
   });
-
   document.documentElement.lang = lang;
   document.documentElement.dir = rtlLangs.includes(lang) ? 'rtl' : 'ltr';
-
   localStorage.setItem('dima_lang', lang);
 }
 
@@ -211,17 +159,15 @@ function initWaitlistForm() {
   const emailInput = document.getElementById('email');
   const emailError = document.getElementById('email-error');
   const successMsg = document.getElementById('form-success');
-
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const email = emailInput.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
-      emailError.textContent = 'Please enter a valid email address.';
+      emailError.textContent = 'Adresse email invalide.';
       emailError.classList.remove('hidden');
       emailInput.classList.add('ring-4', 'ring-crimson/40');
       return;
@@ -244,23 +190,16 @@ function initWaitlistForm() {
         },
         body: JSON.stringify({ email }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
-        successMsg.textContent = '🎉 You\'re on the list! Check your inbox for confirmation.';
+        successMsg.textContent = 'Inscrit ! Vérifie ta boîte mail.';
         successMsg.classList.remove('hidden');
         form.reset();
-
-        const counter = document.getElementById('waitlist-count');
-        if (counter && data.total) {
-          counter.textContent = data.total + '+';
-        }
       } else {
-        throw new Error(data.message || 'Something went wrong');
+        throw new Error(data.message || 'Erreur.');
       }
     } catch (error) {
-      emailError.textContent = error.message || 'Failed to join waitlist. Please try again.';
+      emailError.textContent = error.message || 'Échec. Réessaie.';
       emailError.classList.remove('hidden');
     } finally {
       submitBtn.textContent = originalText;
@@ -272,23 +211,419 @@ function initWaitlistForm() {
 function initActiveNav() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('nav a[href^="#"]');
-
   if (sections.length === 0 || navLinks.length === 0) return;
 
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      if (window.scrollY >= sectionTop) {
-        current = section.getAttribute('id');
-      }
+      if (window.scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
     });
-
     navLinks.forEach(link => {
       link.classList.remove('text-crimson');
-      if (link.getAttribute('href') === '#' + current) {
-        link.classList.add('text-crimson');
-      }
+      if (link.getAttribute('href') === '#' + current) link.classList.add('text-crimson');
+    });
+  });
+}
+
+// ============ PANIER (localStorage, front-end only) ============
+
+const CART_KEY = 'dima_cart';
+
+function getCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+  catch { return []; }
+}
+
+function saveCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  updateCartBadge();
+}
+
+function addToCart(item) {
+  const cart = getCart();
+  const existing = cart.find(i => i.slug === item.slug && i.size === item.size);
+  if (existing) existing.qty += item.qty;
+  else cart.push(item);
+  saveCart(cart);
+  renderCartDrawer();
+  openCartDrawer();
+  toast('Ajouté au panier');
+}
+
+function removeFromCart(index) {
+  const cart = getCart();
+  cart.splice(index, 1);
+  saveCart(cart);
+  renderCartDrawer();
+  renderCheckoutSummary();
+}
+
+function updateCartQty(index, delta) {
+  const cart = getCart();
+  if (!cart[index]) return;
+  cart[index].qty = Math.max(1, cart[index].qty + delta);
+  saveCart(cart);
+  renderCartDrawer();
+  renderCheckoutSummary();
+}
+
+function cartTotal(cart) {
+  return cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+}
+
+function updateCartBadge() {
+  const badge = document.getElementById('cart-count');
+  if (!badge) return;
+  const cart = getCart();
+  const count = cart.reduce((sum, i) => sum + i.qty, 0);
+  badge.textContent = count;
+  badge.classList.toggle('hidden', count === 0);
+}
+
+function renderCartDrawer() {
+  const container = document.getElementById('cart-items');
+  const emptyMsg = document.getElementById('cart-empty');
+  const footer = document.getElementById('cart-footer');
+  const totalEl = document.getElementById('cart-total');
+  if (!container) return;
+
+  const cart = getCart();
+  container.innerHTML = '';
+
+  if (cart.length === 0) {
+    emptyMsg?.classList.remove('hidden');
+    footer?.classList.add('hidden');
+    return;
+  }
+  emptyMsg?.classList.add('hidden');
+  footer?.classList.remove('hidden');
+
+  cart.forEach((item, index) => {
+    const row = document.createElement('div');
+    row.className = 'flex gap-4';
+    row.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" class="w-20 h-24 object-cover bg-[#F5F5F0]">
+      <div class="flex-1">
+        <p class="font-heading font-extrabold text-ink text-sm">${item.name}</p>
+        <p class="text-ink/40 text-xs font-cta uppercase tracking-wide mt-1">Taille ${item.size}</p>
+        <div class="flex items-center gap-3 mt-2">
+          <button data-action="minus" data-index="${index}" class="cart-qty-btn w-6 h-6 border border-ink/15 text-xs font-bold">−</button>
+          <span class="text-sm font-bold">${item.qty}</span>
+          <button data-action="plus" data-index="${index}" class="cart-qty-btn w-6 h-6 border border-ink/15 text-xs font-bold">+</button>
+          <button data-index="${index}" class="cart-remove-btn text-crimson text-xs font-cta font-bold uppercase ml-auto">Retirer</button>
+        </div>
+      </div>
+      <p class="font-bold text-ink text-sm">${(item.price * item.qty).toFixed(0)} €</p>
+    `;
+    container.appendChild(row);
+  });
+
+  container.querySelectorAll('.cart-qty-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      updateCartQty(parseInt(btn.dataset.index), btn.dataset.action === 'plus' ? 1 : -1);
+    });
+  });
+  container.querySelectorAll('.cart-remove-btn').forEach(btn => {
+    btn.addEventListener('click', () => removeFromCart(parseInt(btn.dataset.index)));
+  });
+
+  if (totalEl) totalEl.textContent = cartTotal(cart).toFixed(0) + ' €';
+}
+
+function openCartDrawer() {
+  document.getElementById('cart-drawer')?.classList.remove('translate-x-full');
+  document.getElementById('cart-overlay')?.classList.remove('hidden');
+}
+
+function closeCartDrawer() {
+  document.getElementById('cart-drawer')?.classList.add('translate-x-full');
+  document.getElementById('cart-overlay')?.classList.add('hidden');
+}
+
+function initCartDrawer() {
+  const toggle = document.getElementById('cart-toggle');
+  const close = document.getElementById('cart-close');
+  const overlay = document.getElementById('cart-overlay');
+
+  toggle?.addEventListener('click', () => { renderCartDrawer(); openCartDrawer(); });
+  close?.addEventListener('click', closeCartDrawer);
+  overlay?.addEventListener('click', closeCartDrawer);
+
+  updateCartBadge();
+  renderCartDrawer();
+}
+
+function toast(message) {
+  const el = document.createElement('div');
+  el.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-ink text-white text-sm font-cta font-bold uppercase tracking-wide px-6 py-3 z-[100] shadow-xl';
+  el.textContent = message;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2500);
+}
+
+function initProductPage() {
+  const form = document.getElementById('add-to-cart-form');
+  if (!form) return;
+
+  let selectedSize = null;
+  let qty = 1;
+
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('border-ink', 'bg-ink', 'text-white'));
+      btn.classList.add('border-ink', 'bg-ink', 'text-white');
+      selectedSize = btn.dataset.size;
+      document.getElementById('size-error')?.classList.add('hidden');
+    });
+  });
+
+  document.getElementById('qty-minus')?.addEventListener('click', () => {
+    qty = Math.max(1, qty - 1);
+    document.getElementById('qty-value').textContent = qty;
+  });
+  document.getElementById('qty-plus')?.addEventListener('click', () => {
+    qty += 1;
+    document.getElementById('qty-value').textContent = qty;
+  });
+
+  document.querySelectorAll('.thumb-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('main-image').src = btn.dataset.src;
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!selectedSize) {
+      document.getElementById('size-error')?.classList.remove('hidden');
+      return;
+    }
+    addToCart({
+      slug: form.dataset.slug,
+      name: form.dataset.name,
+      price: parseFloat(form.dataset.price),
+      image: form.dataset.image,
+      size: selectedSize,
+      qty
+    });
+  });
+}
+
+function initCollectionPage() {
+  const grid = document.getElementById('product-grid');
+  if (!grid) return;
+
+  const searchInput = document.getElementById('search-input');
+  const regionSelect = document.getElementById('region-select');
+  const priceSelect = document.getElementById('price-select');
+  const sortSelect = document.getElementById('sort-select');
+  const cards = Array.from(grid.querySelectorAll('.product-card'));
+  const noResults = document.getElementById('no-results');
+
+  function inPriceRange(price, range) {
+    if (!range) return true;
+    const [min, max] = range.split('-').map(Number);
+    return price >= min && price <= max;
+  }
+
+  function apply() {
+    const query = (searchInput?.value || '').toLowerCase();
+    const region = regionSelect?.value || '';
+    const priceRange = priceSelect?.value || '';
+    let visible = 0;
+
+    cards.forEach(card => {
+      const name = card.dataset.name;
+      const price = parseFloat(card.dataset.price);
+      const match = name.toLowerCase().includes(query)
+        && (!region || name === region)
+        && inPriceRange(price, priceRange);
+      card.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+    noResults?.classList.toggle('hidden', visible > 0);
+
+    const sort = sortSelect?.value;
+    if (sort && sort !== 'default') {
+      const sorted = [...cards].sort((a, b) => {
+        if (sort === 'price-asc') return a.dataset.price - b.dataset.price;
+        if (sort === 'price-desc') return b.dataset.price - a.dataset.price;
+        if (sort === 'name-asc') return a.dataset.name.localeCompare(b.dataset.name);
+        return 0;
+      });
+      sorted.forEach(card => grid.appendChild(card));
+    }
+  }
+
+  searchInput?.addEventListener('input', apply);
+  regionSelect?.addEventListener('change', apply);
+  priceSelect?.addEventListener('change', apply);
+  sortSelect?.addEventListener('change', apply);
+}
+
+function renderCheckoutSummary() {
+  const container = document.getElementById('checkout-items');
+  if (!container) return;
+
+  const cart = getCart();
+  const emptyMsg = document.getElementById('checkout-empty');
+  const totalEl = document.getElementById('checkout-total');
+  const submitBtn = document.querySelector('#checkout-form button[type="submit"]');
+
+  container.innerHTML = '';
+
+  if (cart.length === 0) {
+    emptyMsg?.classList.remove('hidden');
+    if (submitBtn) submitBtn.disabled = true;
+  } else {
+    emptyMsg?.classList.add('hidden');
+    if (submitBtn) submitBtn.disabled = false;
+  }
+
+  cart.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'flex justify-between text-sm';
+    row.innerHTML = `
+      <span class="text-ink/70 font-medium">${item.name} — ${item.size} × ${item.qty}</span>
+      <span class="font-bold text-ink">${(item.price * item.qty).toFixed(0)} €</span>
+    `;
+    container.appendChild(row);
+  });
+
+  if (totalEl) totalEl.textContent = cartTotal(cart).toFixed(0) + ' €';
+}
+
+function initCheckoutPage() {
+  const form = document.getElementById('checkout-form');
+  if (!form) return;
+
+  renderCheckoutSummary();
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('checkout-message');
+    if (msg) {
+      msg.textContent = 'Commande simulée — backend à connecter.';
+      msg.classList.remove('hidden');
+    }
+    localStorage.removeItem(CART_KEY);
+    updateCartBadge();
+    renderCheckoutSummary();
+  });
+}
+
+// ============ WISHLIST (localStorage, front-end only) ============
+
+const WISHLIST_KEY = 'dima_wishlist';
+
+function getWishlist() {
+  try { return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || []; }
+  catch { return []; }
+}
+
+function saveWishlist(list) {
+  localStorage.setItem(WISHLIST_KEY, JSON.stringify(list));
+  updateWishlistBadge();
+}
+
+function isInWishlist(slug) {
+  return getWishlist().some(i => i.slug === slug);
+}
+
+function toggleWishlist(item) {
+  let list = getWishlist();
+  if (isInWishlist(item.slug)) {
+    list = list.filter(i => i.slug !== item.slug);
+  } else {
+    list.push(item);
+    toast('Ajouté aux favoris');
+  }
+  saveWishlist(list);
+  refreshWishlistIcons();
+}
+
+function updateWishlistBadge() {
+  const badge = document.getElementById('wishlist-count');
+  if (!badge) return;
+  const count = getWishlist().length;
+  badge.textContent = count;
+  badge.classList.toggle('hidden', count === 0);
+}
+
+function refreshWishlistIcons() {
+  document.querySelectorAll('.wishlist-btn, #wishlist-toggle-btn').forEach(btn => {
+    const slug = btn.dataset.slug;
+    const icon = btn.querySelector('.wishlist-icon');
+    if (!icon) return;
+    if (isInWishlist(slug)) {
+      icon.setAttribute('fill', 'currentColor');
+      btn.classList.add('text-crimson');
+    } else {
+      icon.setAttribute('fill', 'none');
+      btn.classList.remove('text-crimson');
+    }
+  });
+}
+
+function initWishlist() {
+  updateWishlistBadge();
+  refreshWishlistIcons();
+
+  document.querySelectorAll('.wishlist-btn, #wishlist-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleWishlist({
+        slug: btn.dataset.slug,
+        name: btn.dataset.name,
+        price: parseFloat(btn.dataset.price),
+        image: btn.dataset.image
+      });
+    });
+  });
+}
+
+function renderWishlistPage() {
+  const grid = document.getElementById('wishlist-grid');
+  if (!grid) return;
+
+  const list = getWishlist();
+  const emptyMsg = document.getElementById('wishlist-empty');
+
+  if (list.length === 0) {
+    emptyMsg?.classList.remove('hidden');
+    return;
+  }
+  emptyMsg?.classList.add('hidden');
+
+  list.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'relative';
+    card.innerHTML = `
+      <button data-slug="${item.slug}" class="wishlist-remove-btn absolute top-3 right-3 z-10 w-9 h-9 bg-white/90 flex items-center justify-center hover:bg-white text-crimson" aria-label="Retirer des favoris">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      </button>
+      <a href="/produit/${item.slug}" class="group block">
+        <div class="relative overflow-hidden bg-[#F5F5F0] aspect-[4/5]">
+          <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700">
+          <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
+            <h3 class="text-xl font-heading font-extrabold text-white">${item.name}</h3>
+            <p class="text-white/80 font-bold mt-1">${item.price} €</p>
+          </div>
+        </div>
+      </a>
+    `;
+    grid.appendChild(card);
+  });
+
+  grid.querySelectorAll('.wishlist-remove-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const list2 = getWishlist().filter(i => i.slug !== btn.dataset.slug);
+      saveWishlist(list2);
+      renderWishlistPage();
+      grid.innerHTML = '';
+      renderWishlistPage();
     });
   });
 }

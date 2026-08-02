@@ -2,14 +2,11 @@
 
 @theme {
   --color-crimson: #C1272D;
-  --color-crimson-dark: #8B1A1F;
   --color-forest: #006233;
-  --color-forest-dark: #003D20;
   --color-gold: #D4AF37;
-  --color-gold-dark: #B8941E;
-  --color-gold-light: #F4E4C1;
   --color-ivory: #FAF9F6;
   --color-ink: #1A1A1A;
+  --color-crimson-dark: #8B1A1F;
   --font-heading: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-cta: "Montserrat", sans-serif;
@@ -19,23 +16,24 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--font-body);
-    background-color: var(--color-ink);
-    color: var(--color-ivory);
+    background-color: #FFFFFF;
+    color: #1A1A1A;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+  h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: -0.04em; }
 }
 
 @layer components {
-  .btn-primary {
-    @apply bg-crimson text-white font-cta uppercase tracking-wide px-8 py-4 rounded-lg
-           hover:bg-crimson-dark transition-all duration-300 shadow-lg hover:shadow-xl;
+  .btn-cta {
+    @apply bg-crimson text-white font-cta uppercase tracking-[0.15em] px-10 py-5 rounded-sm
+           hover:bg-crimson-dark transition-all duration-300 shadow-xl shadow-crimson/20
+           text-sm font-extrabold;
   }
-  .btn-ghost-gold {
-    @apply border border-gold text-gold font-cta uppercase tracking-wide px-8 py-4 rounded-lg
-           hover:bg-gold hover:text-ink transition-all duration-300;
+  .btn-out {
+    @apply border-2 border-ink text-ink font-cta uppercase tracking-[0.15em] px-10 py-5 rounded-sm
+           hover:bg-ink hover:text-white transition-all duration-300 text-sm font-extrabold;
   }
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20;
   }
 }
