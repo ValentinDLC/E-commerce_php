@@ -7,31 +7,31 @@
     @include('partials.breadcrumb', ['crumbs' => [['label' => 'Collection']]])
 
     <div class="mb-12">
-      <p class="text-[0.7rem] font-cta font-extrabold uppercase tracking-[0.25em] text-crimson mb-3">12 Régions</p>
-      <h1 class="text-5xl md:text-7xl font-extrabold text-ink tracking-tighter leading-[0.9]">LA COLLECTION</h1>
+      <p data-i18n="coll_badge" class="text-[0.7rem] font-cta font-extrabold uppercase tracking-[0.25em] text-crimson mb-3">12 Régions</p>
+      <h1 data-i18n="coll_title" class="text-5xl md:text-7xl font-extrabold text-ink tracking-tighter leading-[0.9]">LA COLLECTION</h1>
     </div>
 
     <div class="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center mb-12 pb-6 border-b border-ink/10">
-      <input id="search-input" type="text" placeholder="Rechercher une région..." class="w-full lg:w-64 px-5 py-3 bg-[#F5F5F0] border-2 border-transparent rounded-sm text-sm font-medium text-ink placeholder:text-ink/40 focus:outline-none focus:border-crimson">
+      <input id="search-input" type="text" data-i18n-placeholder="ph_search" placeholder="Rechercher une région..." class="w-full lg:w-64 px-5 py-3 bg-[#F5F5F0] border-2 border-transparent rounded-sm text-sm font-medium text-ink placeholder:text-ink/40 focus:outline-none focus:border-crimson">
 
       <select id="region-select" class="px-5 py-3 bg-[#F5F5F0] border-2 border-transparent rounded-sm text-sm font-cta font-bold uppercase tracking-wide text-ink focus:outline-none focus:border-crimson">
-        <option value="">Toutes les régions</option>
+        <option value="" data-i18n="filter_all_regions">Toutes les régions</option>
         @foreach($products as $p)
         <option value="{{ $p['name'] }}">{{ $p['name'] }}</option>
         @endforeach
       </select>
 
       <select id="price-select" class="px-5 py-3 bg-[#F5F5F0] border-2 border-transparent rounded-sm text-sm font-cta font-bold uppercase tracking-wide text-ink focus:outline-none focus:border-crimson">
-        <option value="">Tous les prix</option>
+        <option value="" data-i18n="filter_all_prices">Tous les prix</option>
         <option value="0-69">≤ 69 €</option>
         <option value="70-72">70 € – 72 €</option>
       </select>
 
       <select id="sort-select" class="px-5 py-3 bg-[#F5F5F0] border-2 border-transparent rounded-sm text-sm font-cta font-bold uppercase tracking-wide text-ink focus:outline-none focus:border-crimson">
-        <option value="default">Trier : Défaut</option>
-        <option value="price-asc">Prix croissant</option>
-        <option value="price-desc">Prix décroissant</option>
-        <option value="name-asc">Nom A-Z</option>
+        <option value="default" data-i18n="sort_default">Trier : Défaut</option>
+        <option value="price-asc" data-i18n="sort_price_asc">Prix croissant</option>
+        <option value="price-desc" data-i18n="sort_price_desc">Prix décroissant</option>
+        <option value="name-asc" data-i18n="sort_name_asc">Nom A-Z</option>
       </select>
     </div>
 
@@ -57,7 +57,7 @@
       @endforeach
     </div>
 
-    <p id="no-results" class="hidden text-center text-ink/40 font-medium py-20">Aucun résultat.</p>
+    <p id="no-results" data-i18n="no_results" class="hidden text-center text-ink/40 font-medium py-20">Aucun résultat.</p>
   </div>
 </section>
 @endsection

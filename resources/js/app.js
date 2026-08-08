@@ -42,7 +42,20 @@ const translations = {
     wait_title_1: "SOIS LE", wait_title_2: "PREMIER",
     wait_sub: "Accès anticipé, prix exclusifs, priorité sur ton maillot.",
     ph_email: "ton@email.com", btn_submit: "S'INSCRIRE",
-    faq_title: "QUESTIONS."
+    faq_title: "QUESTIONS.",
+    cart_title: "Panier", cart_empty: "Ton panier est vide.", cart_total: "Total", cart_checkout_btn: "Commander",
+    coll_badge: "12 Régions", coll_title: "LA COLLECTION", ph_search: "Rechercher une région...",
+    sort_default: "Trier : Défaut", sort_price_asc: "Prix croissant", sort_price_desc: "Prix décroissant", sort_name_asc: "Nom A-Z",
+    filter_all_regions: "Toutes les régions", filter_all_prices: "Tous les prix", no_results: "Aucun résultat.",
+    prod_edition: "Édition Région", label_size: "Taille", size_error: "Choisis une taille.", label_qty: "Quantité",
+    btn_add_cart: "Ajouter au panier", btn_wishlist: "Favoris",
+    perk_1: "Livraison mondiale", perk_2: "Retours sous 30 jours", perk_3: "Tissu technique respirant",
+    other_regions: "AUTRES RÉGIONS",
+    checkout_title: "COMMANDE", label_contact: "Contact", ph_firstname: "Prénom", ph_lastname: "Nom", ph_phone: "Téléphone",
+    label_shipping: "Livraison", ph_address: "Adresse", ph_city: "Ville", ph_zip: "Code postal", ph_country: "Pays",
+    btn_confirm: "Confirmer la commande", label_summary: "Résumé", checkout_empty: "Panier vide.",
+    checkout_view_collection: "Voir la collection", label_total: "Total",
+    wishlist_title: "MES FAVORIS", wishlist_empty: "Aucun favori.", wishlist_view_collection: "Voir la collection"
   },
   en: {
     nav_coll: "Collection", nav_design: "Design", nav_join: "Join",
@@ -62,7 +75,20 @@ const translations = {
     wait_title_1: "BE THE", wait_title_2: "FIRST",
     wait_sub: "Early access, exclusive pricing, priority on your jersey.",
     ph_email: "your@email.com", btn_submit: "SIGN UP",
-    faq_title: "QUESTIONS."
+    faq_title: "QUESTIONS.",
+    cart_title: "Cart", cart_empty: "Your cart is empty.", cart_total: "Total", cart_checkout_btn: "Checkout",
+    coll_badge: "12 Regions", coll_title: "THE COLLECTION", ph_search: "Search a region...",
+    sort_default: "Sort: Default", sort_price_asc: "Price: Low to High", sort_price_desc: "Price: High to Low", sort_name_asc: "Name A-Z",
+    filter_all_regions: "All regions", filter_all_prices: "All prices", no_results: "No results.",
+    prod_edition: "Region Edition", label_size: "Size", size_error: "Choose a size.", label_qty: "Quantity",
+    btn_add_cart: "Add to cart", btn_wishlist: "Wishlist",
+    perk_1: "Worldwide shipping", perk_2: "30-day returns", perk_3: "Breathable technical fabric",
+    other_regions: "OTHER REGIONS",
+    checkout_title: "CHECKOUT", label_contact: "Contact", ph_firstname: "First name", ph_lastname: "Last name", ph_phone: "Phone",
+    label_shipping: "Shipping", ph_address: "Address", ph_city: "City", ph_zip: "Zip code", ph_country: "Country",
+    btn_confirm: "Confirm order", label_summary: "Summary", checkout_empty: "Cart empty.",
+    checkout_view_collection: "See the collection", label_total: "Total",
+    wishlist_title: "MY WISHLIST", wishlist_empty: "No favorites.", wishlist_view_collection: "See the collection"
   },
   ar: {
     nav_coll: "المجموعة", nav_design: "التصميم", nav_join: "انضم",
@@ -82,7 +108,20 @@ const translations = {
     wait_title_1: "كن", wait_title_2: "الأول",
     wait_sub: "وصول مبكر، أسعار حصرية، أولوية على قميصك.",
     ph_email: "بريدك@الإلكتروني.com", btn_submit: "سجّل",
-    faq_title: "أسئلة."
+    faq_title: "أسئلة.",
+    cart_title: "السلة", cart_empty: "سلتك فارغة.", cart_total: "المجموع", cart_checkout_btn: "إتمام الطلب",
+    coll_badge: "12 جهة", coll_title: "المجموعة", ph_search: "ابحث عن جهة...",
+    sort_default: "ترتيب: افتراضي", sort_price_asc: "السعر: تصاعدي", sort_price_desc: "السعر: تنازلي", sort_name_asc: "الاسم أ-ي",
+    filter_all_regions: "كل الجهات", filter_all_prices: "كل الأسعار", no_results: "لا نتائج.",
+    prod_edition: "إصدار الجهة", label_size: "المقاس", size_error: "اختر مقاساً.", label_qty: "الكمية",
+    btn_add_cart: "أضف إلى السلة", btn_wishlist: "المفضلة",
+    perk_1: "شحن عالمي", perk_2: "إرجاع خلال 30 يوماً", perk_3: "قماش تقني قابل للتنفس",
+    other_regions: "جهات أخرى",
+    checkout_title: "الطلب", label_contact: "التواصل", ph_firstname: "الاسم الأول", ph_lastname: "اسم العائلة", ph_phone: "الهاتف",
+    label_shipping: "التوصيل", ph_address: "العنوان", ph_city: "المدينة", ph_zip: "الرمز البريدي", ph_country: "البلد",
+    btn_confirm: "تأكيد الطلب", label_summary: "ملخص", checkout_empty: "السلة فارغة.",
+    checkout_view_collection: "شاهد المجموعة", label_total: "المجموع",
+    wishlist_title: "مفضلتي", wishlist_empty: "لا مفضلات.", wishlist_view_collection: "شاهد المجموعة"
   },
   tz: {
     nav_coll: "Tagrumma", nav_design: "Asuɣ", nav_join: "Ddu yidneɣ",
@@ -102,7 +141,20 @@ const translations = {
     wait_title_1: "ILI D", wait_title_2: "AMEZWARU",
     wait_sub: "Anekcum azwir, ssuma tazadaṛt.",
     ph_email: "imayl-ik@email.com", btn_submit: "JERI",
-    faq_title: "ISTEQSIYEN."
+    faq_title: "ISTEQSIYEN.",
+    cart_title: "Asaru", cart_empty: "Asaru-ik d ilem.", cart_total: "Asemday", cart_checkout_btn: "Sentem",
+    coll_badge: "12 Timnaḍin", coll_title: "TAGRUMMA", ph_search: "Nadi tamnaḍt...",
+    sort_default: "Asegri: Amezwer", sort_price_asc: "Asuma: Yezday", sort_price_desc: "Asuma: Yers", sort_name_asc: "Isem A-Z",
+    filter_all_regions: "Akk timnaḍin", filter_all_prices: "Akk isuma", no_results: "Ulac igmaḍ.",
+    prod_edition: "Asuɣ n tmnaḍt", label_size: "Tiddi", size_error: "Fren tiddi.", label_qty: "Ttadad",
+    btn_add_cart: "Rnu ɣer usaru", btn_wishlist: "Iɣaben",
+    perk_1: "Aseḍku ɣer umaḍal", perk_2: "Tuɣalin deg 30 wussan", perk_3: "Cḍiḍ itiknikan",
+    other_regions: "TIMNAḌIN NNIḌEN",
+    checkout_title: "ASENTEM", label_contact: "Anermes", ph_firstname: "Isem", ph_lastname: "Isem n twacult", ph_phone: "Tilifun",
+    label_shipping: "Aseḍku", ph_address: "Tansa", ph_city: "Tamdint", ph_zip: "Tangalt tabusṭit", ph_country: "Tamurt",
+    btn_confirm: "Sentem asentem", label_summary: "Agzul", checkout_empty: "Asaru d ilem.",
+    checkout_view_collection: "Wali tagrumma", label_total: "Asemday",
+    wishlist_title: "IƔABEN-IW", wishlist_empty: "Ulac iɣaben.", wishlist_view_collection: "Wali tagrumma"
   }
 };
 
